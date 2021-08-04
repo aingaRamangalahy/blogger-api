@@ -2,11 +2,11 @@ import * as mongoose from "mongoose";
 import * as bcrypt from "bcrypt";
 import * as jwt from "jsonwebtoken";
 
-import { IUser } from "../types";
+import { IUser, IUserDocument } from "../types";
 import { JWT_SECRET, JWT_EXPIRE } from "../environment";
 
 let Schema = mongoose.Schema;
-let UserSchema = new Schema<IUser>(
+let UserSchema = new Schema<IUserDocument>(
     {
         name: {
             type: String,
@@ -48,7 +48,7 @@ let UserSchema = new Schema<IUser>(
 /**
  * Crypt user password before save
  */
-UserSchema.pre<IUser>("save", async function (next) {
+UserSchema.pre<IUserDocument>("save", async function (next: Function) {
     if (!this.isModified("password")) {
         next();
     }
@@ -77,8 +77,8 @@ UserSchema.methods.generateToken = function () {
  * @return boolean value
  */
 UserSchema.methods.matchPassword = async function (inputPassword) {
-    return bcrypt.compare(inputPassword, this.password)
+    return await bcrypt.compare(inputPassword, this.password)
 }
 
 
-export default mongoose.model<IUser>("User", UserSchema);
+export default mongoose.model<IUserDocument>("User", UserSchema);

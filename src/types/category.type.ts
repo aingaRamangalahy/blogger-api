@@ -1,6 +1,4 @@
-import * as mongoose from "mongoose";
-
-export interface ICategory extends mongoose.Document {
+export interface ICategory {
     name: string;
     description: string;
     coverImage: string;

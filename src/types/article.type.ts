@@ -1,5 +1,4 @@
-import * as mongoose from "mongoose";
-export interface IArticle extends mongoose.Document {
+export interface IArticle  {
     title: string;
     description: string;
     author: string;

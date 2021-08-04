@@ -1,6 +1,6 @@
-import * as mongoose from "mongoose";
+import { Document } from "mongoose";
 
-export interface IUser extends mongoose.Document{
+export interface IUser {
     name: string;
     email: string;
     role: string;
@@ -9,4 +9,9 @@ export interface IUser extends mongoose.Document{
     about: string;
     createdAt: Date;
     updatedAt?: Date;
+}
+
+export interface IUserDocument extends IUser, Document {
+    generateToken(): string;
+    matchPassword: (password: string) => Promise<boolean>;
 }

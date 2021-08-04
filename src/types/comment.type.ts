@@ -1,6 +1,4 @@
-import * as mongoose from "mongoose";
-
-export interface IComment extends mongoose.Document {
+export interface IComment {
     author: string;
     content: string;
     article: string;
