@@ -4,65 +4,46 @@ import { ErrorResponse } from "../utils";
 import { ExtendedRequest } from "../types";
 
 import User from "../models/user.model";
+import UserService from "../services/user.service";
 
 class UserController {
-    constructor() {}
+    userService: UserService;
+    constructor() {
+        this.userService = new UserService(User);
+    }
 
     getUsers = asyncHandler(
         async (req: ExtendedRequest, res: Response, next: NextFunction) => {
-            const users = await User.find();
-
-            res.status(200).json({
-                success: true,
-                data: users,
-            });
+            const users = await this.userService.getAllUsers()
+            res.status(200).json(users);
         }
     );
 
     getUser = asyncHandler(
         async (req: ExtendedRequest, res: Response, next: NextFunction) => {
-            const user = await User.findById(req.params.id);
-
-            res.status(200).json({
-                success: true,
-                data: user,
-            });
+            const user = await this.userService.getOneUser(req.params.id);
+            res.status(200).json(user);
         }
     );
 
     createUser = asyncHandler(
         async (req: ExtendedRequest, res: Response, next: NextFunction) => {
-            let user = await User.create(req.body);
-
-            res.status(200).json({
-                success: true,
-                data: user,
-            });
+            let user = await this.userService.createUser(req.body)
+            res.status(200).json(user);
         }
     );
 
     updateUser = asyncHandler(
         async (req: ExtendedRequest, res: Response, next: NextFunction) => {
-            const user = await User.findByIdAndUpdate(req.params.id, req.body, {
-                new: true,
-                runValidators: true,
-            });
-
-            res.status(200).json({
-                success: true,
-                data: user,
-            });
+            const user = await this.userService.updateUser(req.params.id, req.body)
+            res.status(200).json(user);
         }
     );
 
     deleteUser = asyncHandler(
         async (req: ExtendedRequest, res: Response, next: NextFunction) => {
-            await User.findByIdAndDelete(req.params.id);
-
-            res.status(200).json({
-                success: true,
-                data: {},
-            });
+            let result = await this.userService.deleteUser(req.params.id)
+            res.status(200).json(result);
         }
     );
 }

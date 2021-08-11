@@ -7,7 +7,7 @@ import { NextFunction, Request, Response } from "express";
  * @param fn an express route handler function
  */
 const asyncHandler =
-  (fn) => (req: Request, res: Response, next: NextFunction) =>
+  (fn) => (req?: Request, res?: Response, next?: NextFunction) =>
     Promise.resolve(fn(req, res, next)).catch(next);
 
 export { asyncHandler };
