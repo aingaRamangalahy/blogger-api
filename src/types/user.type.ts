@@ -5,6 +5,8 @@ export interface IUser {
     email: string;
     role: string;
     password: string;
+    connected: boolean;
+    activated: boolean;
     photo: string;
     about: string;
     createdAt: Date;

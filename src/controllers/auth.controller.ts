@@ -28,6 +28,10 @@ class AuthenticationController {
             if (!isMatched) {
                 return next(new ErrorResponse("Wrong password", 401))
             }
+            
+            user.connected = true;
+
+            user.save({ validateBeforeSave: false });
 
             this.sendTokenResponse(user, res);
         }
@@ -35,13 +39,32 @@ class AuthenticationController {
 
     register = asyncHandler(
         async (req: ExtendedRequest, res: Response, next: NextFunction) => {
+            const { name, email, password, role, about} = req.body;
 
+            const user = await User.create({
+                name,
+                email,
+                password,
+                about,
+                role,
+            });
+
+            this.sendTokenResponse(user, res);
         }
     )
 
     logout = asyncHandler(
         async (req: ExtendedRequest, res: Response, next: NextFunction) => {
+            const user = await User.findById(req.params.id);
 
+            user.connected = false;
+
+            user.save({ validateBeforeSave: false });
+
+            res.status(200).json({
+                success: true,
+                data: user,
+            })
         }
     )
 

@@ -39,6 +39,16 @@ let UserSchema = new Schema<IUserDocument>(
         about: {
             type: String,
         },
+        connected: {
+            type: Boolean,
+            required: true,
+            default: false
+        },
+        activated: {
+            type: Boolean,
+            required: true,
+            default: false
+        },
         createdAt: { type: Date, default: Date.now },
         updatedAt: { type: Date, required: false },
     },
