@@ -4,12 +4,12 @@ import * as bodyParser from "body-parser";
 import * as cors from "cors";
 import * as mongoose from "mongoose";
 
-import { DB_URI, BODY_PARSER_LIMIT } from "./environment";
+import { DB_URI, BODY_PARSER_LIMIT } from "../environment";
 
-import AppRoutes from "./routes";
-import { errorHandler } from "./middlewares";
+import AppRoutes from "../routes";
+import { errorHandler } from "../middlewares";
 
-class Server {
+class ServerLoader {
     private app: express.Application;
 
     constructor(private port) {
@@ -59,4 +59,4 @@ class Server {
     }
 }
 
-export default Server;
+export default ServerLoader;

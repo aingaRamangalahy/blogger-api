@@ -1,9 +1,9 @@
 import { Response, Request, NextFunction } from "express";
-import { asyncHandler } from "../middlewares";
-import { ErrorResponse } from "../utils";
-import { ExtendedRequest } from "../types";
+import { asyncHandler } from "../core/middlewares";
+import { ErrorResponse } from "../core/utils";
+import { ExtendedRequest } from "../interfaces/model-interfaces";
 
-import Category from "../models/category.model";
+import Category from "../core/models/category.model";
 
 class CategoryController {
     constructor() {}

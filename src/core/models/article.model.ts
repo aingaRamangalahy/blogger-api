@@ -1,5 +1,5 @@
 import * as mongoose from "mongoose";
-import { IArticle } from "../types"
+import { IArticle } from "../../interfaces/model-interfaces"
 
 let Schema = mongoose.Schema;
 

@@ -1,9 +1,9 @@
 import { Response, Request, NextFunction } from "express";
-import { asyncHandler } from "../middlewares";
-import { ErrorResponse } from "../utils";
-import { ExtendedRequest, IUserDocument } from "../types";
+import { asyncHandler } from "../core/middlewares";
+import { ErrorResponse } from "../core/utils";
+import { ExtendedRequest, IUserDocument } from "../interfaces/model-interfaces";
 
-import User from "../models/user.model"
+import User from "../core/models/user.model"
 
 class AuthenticationController {
     constructor() {}

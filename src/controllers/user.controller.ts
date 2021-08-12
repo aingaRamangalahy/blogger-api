@@ -1,20 +1,19 @@
 import { Response, Request, NextFunction } from "express";
-import { asyncHandler } from "../middlewares";
-import { ErrorResponse } from "../utils";
-import { ExtendedRequest } from "../types";
-
-import User from "../models/user.model";
+import { asyncHandler } from "../core/middlewares";
+import { ErrorResponse } from "../core/utils";
+import { ExtendedRequest } from "../interfaces/model-interfaces";
 import UserService from "../services/user.service";
+import Container, { Inject } from "typedi";
 
 class UserController {
-    userService: UserService;
+    private readonly userService: UserService = Container.get(UserService);
+    
     constructor() {
-        this.userService = new UserService(User);
     }
 
     getUsers = asyncHandler(
         async (req: ExtendedRequest, res: Response, next: NextFunction) => {
-            const users = await this.userService.getAllUsers()
+            const users = await this.userService.getAllUsers();
             res.status(200).json(users);
         }
     );
@@ -28,21 +27,24 @@ class UserController {
 
     createUser = asyncHandler(
         async (req: ExtendedRequest, res: Response, next: NextFunction) => {
-            let user = await this.userService.createUser(req.body)
+            let user = await this.userService.createUser(req.body);
             res.status(200).json(user);
         }
     );
 
     updateUser = asyncHandler(
         async (req: ExtendedRequest, res: Response, next: NextFunction) => {
-            const user = await this.userService.updateUser(req.params.id, req.body)
+            const user = await this.userService.updateUser(
+                req.params.id,
+                req.body
+            );
             res.status(200).json(user);
         }
     );
 
     deleteUser = asyncHandler(
         async (req: ExtendedRequest, res: Response, next: NextFunction) => {
-            let result = await this.userService.deleteUser(req.params.id)
+            let result = await this.userService.deleteUser(req.params.id);
             res.status(200).json(result);
         }
     );

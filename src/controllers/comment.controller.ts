@@ -1,9 +1,9 @@
 import { Response, Request, NextFunction } from "express";
-import { asyncHandler } from "../middlewares";
-import { ErrorResponse } from "../utils";
-import { ExtendedRequest } from "../types";
+import { asyncHandler } from "../core/middlewares";
+import { ErrorResponse } from "../core/utils";
+import { ExtendedRequest } from "../interfaces/model-interfaces";
 
-import Comment from "../models/comment.model";
+import Comment from "../core/models/comment.model";
 
 class CommentController {
     constructor() {}

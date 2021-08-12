@@ -1,5 +1,5 @@
 import * as mongoose from "mongoose";
-import { ICategory } from "../types";
+import { ICategory } from "../../interfaces/model-interfaces";
 
 let Schema = mongoose.Schema;
 

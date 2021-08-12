@@ -5,7 +5,7 @@ import { asyncHandler } from "./asyncHandler";
 import * as jwt from "jsonwebtoken";
 
 import User from "../models/user.model";
-import { ExtendedRequest, IUser } from "../types";
+import { ExtendedRequest, IUser } from "../../interfaces/model-interfaces";
 import { JWT_SECRET } from "../environment";
 
 class Auth {

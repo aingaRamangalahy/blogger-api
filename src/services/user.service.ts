@@ -1,17 +1,20 @@
+import Container, { Inject, Service } from "typedi";
+import { IUser, IUserDocument } from "../interfaces/model-interfaces";
+import User from "../core/models/user.model";
 import { Model } from "mongoose";
-import { asyncHandler } from "../middlewares";
-import { IUser, IUserDocument } from "../types";
+import { UserRepository } from "../repositories/user.repository";
 
+@Service()
 export default class UserService {
-    userModel: Model<IUserDocument>;
-
-    constructor(userModel: Model<IUserDocument>) {
-        this.userModel = userModel;
+    private readonly userRepository: UserRepository;
+    
+    constructor() {
+        this.userRepository = new UserRepository(User)
     }
 
-    createUser = async (userPayload: IUser) => {
+    createUser = async (userPayload: IUserDocument) => {
         try {
-            let user = await this.userModel.create(userPayload);
+            let user = await this.userRepository.addUser(userPayload);
             return {
                 success: true,
                 data: user,
@@ -24,7 +27,7 @@ export default class UserService {
 
     getAllUsers = async () => {
         try {
-            let users = await this.userModel.find();
+            let users = await this.userRepository.getUsers();
             return {
                 success: true,
                 data: users,
@@ -36,7 +39,7 @@ export default class UserService {
 
     getOneUser = async (id: string) => {
         try {
-            let user = await this.userModel.findById(id);
+            let user = await this.userRepository.getUserById(id);
             return {
                 success: true,
                 data: user,
@@ -46,12 +49,9 @@ export default class UserService {
         }
     };
 
-    updateUser = async (id: string, userPayload: IUser) => {
+    updateUser = async (id: string, userPayload: IUserDocument) => {
         try {
-            let user = await this.userModel.findByIdAndUpdate(id, userPayload, {
-                runValidators: true,
-                new: true,
-            });
+            let user = await this.userRepository.updateUser(id, userPayload);
 
             return {
                 success: true,
@@ -64,7 +64,7 @@ export default class UserService {
 
     deleteUser = async (id: string) => {
         try {
-            await this.userModel.findByIdAndDelete(id);
+            await this.userRepository.deleteUser(id);
             return {
                 success: true,
                 data: `User removed successfully`,
