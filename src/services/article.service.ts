@@ -1,4 +1,4 @@
-import { IArticle } from "../interfaces/model-interfaces";
+import { IArticle } from "../core/interfaces/model-interfaces";
 import { ArticleRepository } from "../repositories/article.repository";
 import Article from "../core/models/article.model";
 import { Service } from "typedi";

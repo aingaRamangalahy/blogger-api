@@ -1,4 +1,4 @@
-import { ICategory } from "../interfaces/model-interfaces";
+import { ICategory } from "../core/interfaces/model-interfaces";
 import { CategoryRepository } from "../repositories/category.repository";
 import Category from "../core/models/category.model";
 import { Service } from "typedi";

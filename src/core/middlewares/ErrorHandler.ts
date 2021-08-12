@@ -1,5 +1,5 @@
 import { NextFunction, Response, Request } from "express";
-import { ExtendedRequest } from "../../interfaces/model-interfaces";
+import { ExtendedRequest } from "../../core/interfaces/model-interfaces";
 import { ErrorResponse } from "../utils";
 
 const errorHandler = (

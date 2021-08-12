@@ -2,7 +2,7 @@ import * as mongoose from "mongoose";
 import * as bcrypt from "bcrypt";
 import * as jwt from "jsonwebtoken";
 
-import { IUser, IUserDocument } from "../../interfaces/model-interfaces";
+import { IUser, IUserDocument } from "../../core/interfaces/model-interfaces";
 import { JWT_SECRET, JWT_EXPIRE } from "../environment";
 
 let Schema = mongoose.Schema;

@@ -1,5 +1,5 @@
 import Container, { Inject, Service } from "typedi";
-import { IUser, IUserDocument } from "../interfaces/model-interfaces";
+import { IUser, IUserDocument } from "../core/interfaces/model-interfaces";
 import User from "../core/models/user.model";
 import { Model } from "mongoose";
 import { UserRepository } from "../repositories/user.repository";

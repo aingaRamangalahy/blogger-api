@@ -1,72 +1,58 @@
 import { Response, Request, NextFunction } from "express";
 import { asyncHandler } from "../core/middlewares";
 import { ErrorResponse } from "../core/utils";
-import { ExtendedRequest } from "../interfaces/model-interfaces";
+import { ExtendedRequest } from "../core/interfaces/model-interfaces";
 
 import Category from "../core/models/category.model";
+import { CategoryRepository } from "../repositories/category.repository";
+import Container from "typedi";
+import CategoryService from "../services/category.service";
 
 class CategoryController {
+    private readonly categoryService: CategoryService = Container.get(CategoryService);
     constructor() {}
 
     getCategories = asyncHandler(
         async (req: ExtendedRequest, res: Response, next: NextFunction) => {
-            const categories = await Category.find();
-
-            res.status(200).json({
-                success: true,
-                data: categories,
-            });
+            const response = await this.categoryService.getAllCategories();
+            res.status(200).json(response);
         }
     );
 
     getCategory = asyncHandler(
         async (req: ExtendedRequest, res: Response, next: NextFunction) => {
-            const category = await Category.findById(req.params.id);
-
-            res.status(200).json({
-                success: true,
-                data: category,
-            });
+            const response = await this.categoryService.getCategoryById(
+                req.params.id
+            );
+            res.status(200).json(response);
         }
     );
 
     createCategory = asyncHandler(
         async (req: ExtendedRequest, res: Response, next: NextFunction) => {
-            const category = await Category.create(req.body);
-
-            res.status(200).json({
-                success: true,
-                data: category,
-            });
+            const response = await this.categoryService.createCategory(
+                req.body
+            );
+            res.status(200).json(response);
         }
     );
 
     updateCategory = asyncHandler(
         async (req: ExtendedRequest, res: Response, next: NextFunction) => {
-            const category = await Category.findByIdAndUpdate(
+            const response = await this.categoryService.updateCategory(
                 req.params.id,
-                req.body,
-                {
-                    new: true,
-                    runValidators: true,
-                }
+                req.body
             );
-
-            res.status(200).json({
-                success: true,
-                data: category,
-            });
+            res.status(200).json(response);
         }
     );
 
     deleteCategory = asyncHandler(
         async (req: ExtendedRequest, res: Response, next: NextFunction) => {
-            await Category.findByIdAndDelete(req.params.id);
-
-            res.status(200).json({
-                success: true,
-                data: {},
-            });
+            const response = await this.categoryService.deleteCategory(
+                req.params.id
+            );
+            res.status(200).json(response);
         }
     );
 }

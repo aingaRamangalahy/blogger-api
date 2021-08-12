@@ -1,4 +1,4 @@
-import { IComment } from "../interfaces/model-interfaces";
+import { IComment } from "../core/interfaces/model-interfaces";
 import { CommentRepository } from "../repositories/comment.repository";
 import Comment from "../core/models/comment.model";
 import { Service } from "typedi";

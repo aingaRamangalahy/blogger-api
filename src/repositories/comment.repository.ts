@@ -1,5 +1,5 @@
 
-import { IComment } from "../interfaces/model-interfaces";
+import { IComment } from "../core/interfaces/model-interfaces";
 import { BaseRepository } from "./base/base.repository";
 
 export class CommentRepository extends BaseRepository<IComment> {

@@ -1,5 +1,5 @@
-import { IWrite } from "../../interfaces/action-interfaces";
-import { IRead } from "../../interfaces/action-interfaces";
+import { IWrite } from "../../core/interfaces/action-interfaces";
+import { IRead } from "../../core/interfaces/action-interfaces";
 import { Model } from "mongoose";
 
 export abstract class BaseRepository<T> implements IRead<T>, IWrite<T> {

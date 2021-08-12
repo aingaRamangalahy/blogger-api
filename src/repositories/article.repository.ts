@@ -1,5 +1,5 @@
 
-import { IArticle } from "../interfaces/model-interfaces";
+import { IArticle } from "../core/interfaces/model-interfaces";
 import { BaseRepository } from "./base/base.repository";
 
 export class ArticleRepository extends BaseRepository<IArticle> {

@@ -1,4 +1,4 @@
-import { IUserDocument } from "../interfaces/model-interfaces";
+import { IUserDocument } from "../core/interfaces/model-interfaces";
 import { BaseRepository } from "./base/base.repository";
 
 export class UserRepository extends BaseRepository<IUserDocument> {
