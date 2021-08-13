@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import CommentController from '../../controllers/comment.controller';
+import CommentController from '../controllers/comment.controller';
 
 class CommentRouter {
 

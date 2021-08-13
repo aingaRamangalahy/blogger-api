@@ -1,12 +1,12 @@
 import { NextFunction, Request, Response } from "express";
-import { ErrorResponse } from "../utils";
+import { ErrorResponse } from "../../core/utils";
 import { asyncHandler } from "./asyncHandler";
 
 import * as jwt from "jsonwebtoken";
 
-import User from "../models/user.model";
+import User from "../../core/models/user.model";
 import { ExtendedRequest, IUser } from "../../core/interfaces/model-interfaces";
-import { JWT_SECRET } from "../environment";
+import { JWT_SECRET } from "../../core/environment";
 
 class Auth {
     /**

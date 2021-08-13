@@ -1,13 +1,14 @@
 import { Response, Request, NextFunction } from "express";
-import { asyncHandler } from "../core/middlewares";
-import { ErrorResponse } from "../core/utils";
-import { ExtendedRequest } from "../core/interfaces/model-interfaces";
+import { asyncHandler } from "../middlewares";
+import { ErrorResponse } from "../../core/utils";
+import { ExtendedRequest } from "../../core/interfaces/model-interfaces";
 
 import Container from "typedi";
 import ArticleService from "../services/article.service";
 
 class ArticleController {
-    private readonly articleService: ArticleService = Container.get(ArticleService);
+    private readonly articleService: ArticleService =
+        Container.get(ArticleService);
     constructor() {}
 
     getArticles = asyncHandler(

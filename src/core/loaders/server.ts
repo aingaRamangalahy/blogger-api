@@ -6,8 +6,8 @@ import * as mongoose from "mongoose";
 
 import { DB_URI, BODY_PARSER_LIMIT } from "../environment";
 
-import AppRoutes from "../routes";
-import { errorHandler } from "../middlewares";
+import AppRoutes from "../../layers/routes";
+import { errorHandler } from "../../layers/middlewares";
 
 class ServerLoader {
     private app: express.Application;

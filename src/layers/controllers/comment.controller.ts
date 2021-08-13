@@ -1,13 +1,14 @@
 import { Response, Request, NextFunction } from "express";
-import { asyncHandler } from "../core/middlewares";
-import { ErrorResponse } from "../core/utils";
-import { ExtendedRequest } from "../core/interfaces/model-interfaces";
+import { asyncHandler } from "../middlewares";
+import { ErrorResponse } from "../../core/utils";
+import { ExtendedRequest } from "../../core/interfaces/model-interfaces";
 
-import CommentService from "../services/comment.service";
 import Container from "typedi";
+import CommentService from "../services/comment.service";
 
 class CommentController {
-    private readonly commentService: CommentService = Container.get(CommentService);
+    private readonly commentService: CommentService =
+        Container.get(CommentService);
     constructor() {}
 
     getComments = asyncHandler(

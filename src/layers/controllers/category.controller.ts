@@ -1,15 +1,15 @@
 import { Response, Request, NextFunction } from "express";
-import { asyncHandler } from "../core/middlewares";
-import { ErrorResponse } from "../core/utils";
-import { ExtendedRequest } from "../core/interfaces/model-interfaces";
+import { asyncHandler } from "../middlewares";
+import { ErrorResponse } from "../../core/utils";
+import { ExtendedRequest } from "../../core/interfaces/model-interfaces";
 
-import Category from "../core/models/category.model";
-import { CategoryRepository } from "../repositories/category.repository";
+import Category from "../../core/models/category.model";
 import Container from "typedi";
 import CategoryService from "../services/category.service";
 
 class CategoryController {
-    private readonly categoryService: CategoryService = Container.get(CategoryService);
+    private readonly categoryService: CategoryService =
+        Container.get(CategoryService);
     constructor() {}
 
     getCategories = asyncHandler(

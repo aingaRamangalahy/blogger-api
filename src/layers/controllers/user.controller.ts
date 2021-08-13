@@ -1,15 +1,14 @@
 import { Response, Request, NextFunction } from "express";
-import { asyncHandler } from "../core/middlewares";
-import { ErrorResponse } from "../core/utils";
-import { ExtendedRequest } from "../core/interfaces/model-interfaces";
+import { asyncHandler } from "../middlewares";
+import { ErrorResponse } from "../../core/utils";
+import { ExtendedRequest } from "../../core/interfaces/model-interfaces";
 import Container from "typedi";
 import UserService from "../services/user.service";
 
 class UserController {
     private readonly userService: UserService = Container.get(UserService);
-    
-    constructor() {
-    }
+
+    constructor() {}
 
     getUsers = asyncHandler(
         async (req: ExtendedRequest, res: Response, next: NextFunction) => {

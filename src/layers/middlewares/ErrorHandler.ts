@@ -1,6 +1,6 @@
 import { NextFunction, Response, Request } from "express";
 import { ExtendedRequest } from "../../core/interfaces/model-interfaces";
-import { ErrorResponse } from "../utils";
+import { ErrorResponse } from "../../core/utils";
 
 const errorHandler = (
     err: any,

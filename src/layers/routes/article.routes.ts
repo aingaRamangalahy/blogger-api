@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import ArticleController from '../../controllers/article.contoller';
+import ArticleController from '../controllers/article.contoller';
 
 class ArticleRouter {
 
