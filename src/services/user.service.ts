@@ -1,15 +1,15 @@
-import Container, { Inject, Service } from "typedi";
-import { IUser, IUserDocument } from "../core/interfaces/model-interfaces";
+import { Service } from "typedi";
+import { IUserDocument } from "../core/interfaces/model-interfaces";
 import User from "../core/models/user.model";
-import { Model } from "mongoose";
+import { ErrorResponse } from "../core/utils";
 import { UserRepository } from "../repositories/user.repository";
 
 @Service()
 export default class UserService {
     private readonly userRepository: UserRepository;
-    
+
     constructor() {
-        this.userRepository = new UserRepository(User)
+        this.userRepository = new UserRepository(User);
     }
 
     createUser = async (userPayload: IUserDocument) => {
@@ -37,9 +37,14 @@ export default class UserService {
         }
     };
 
-    getOneUser = async (id: string) => {
+    getUserById = async (id: string) => {
         try {
             let user = await this.userRepository.getUserById(id);
+
+            if (!user) {
+                throw new ErrorResponse(`User with id: ${id} not found`, 404);
+            }
+
             return {
                 success: true,
                 data: user,
@@ -53,10 +58,15 @@ export default class UserService {
         try {
             let user = await this.userRepository.updateUser(id, userPayload);
 
+            if (!user) {
+                throw new ErrorResponse(`User with id: ${id} not found`, 404);
+            }
+
             return {
                 success: true,
                 data: user,
             };
+
         } catch (error) {
             throw error;
         }
@@ -64,11 +74,15 @@ export default class UserService {
 
     deleteUser = async (id: string) => {
         try {
-            await this.userRepository.deleteUser(id);
+            let user = await this.userRepository.deleteUser(id);
+            if (!user) {
+                throw new ErrorResponse(`User with id: ${id} not found`, 404);
+            }
             return {
                 success: true,
                 data: `User removed successfully`,
             };
+            
         } catch (error) {
             throw error;
         }

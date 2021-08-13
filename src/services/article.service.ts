@@ -19,7 +19,6 @@ export default class ArticleService {
                 data: article,
             };
         } catch (error) {
-            /**thorw errors to let erroHandler handle them */
             throw error;
         }
     };

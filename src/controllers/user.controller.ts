@@ -2,7 +2,7 @@ import { Response, Request, NextFunction } from "express";
 import { asyncHandler } from "../core/middlewares";
 import { ErrorResponse } from "../core/utils";
 import { ExtendedRequest } from "../core/interfaces/model-interfaces";
-import Container, { Inject } from "typedi";
+import Container from "typedi";
 import UserService from "../services/user.service";
 
 class UserController {
@@ -20,7 +20,7 @@ class UserController {
 
     getUser = asyncHandler(
         async (req: ExtendedRequest, res: Response, next: NextFunction) => {
-            const response = await this.userService.getOneUser(req.params.id);
+            const response = await this.userService.getUserById(req.params.id);
             res.status(200).json(response);
         }
     );
