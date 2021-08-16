@@ -3,7 +3,7 @@ import * as bcrypt from "bcrypt";
 import * as jwt from "jsonwebtoken";
 
 import { IUser, IUserDocument } from "../../core/interfaces/model-interfaces";
-import { JWT_SECRET, JWT_EXPIRE } from "../environment";
+import { JWT_SECRET, JWT_EXPIRE } from "../../core/environment";
 
 let Schema = mongoose.Schema;
 let UserSchema = new Schema<IUserDocument>(
@@ -42,12 +42,12 @@ let UserSchema = new Schema<IUserDocument>(
         connected: {
             type: Boolean,
             required: true,
-            default: false
+            default: false,
         },
         activated: {
             type: Boolean,
             required: true,
-            default: false
+            default: false,
         },
         createdAt: { type: Date, default: Date.now },
         updatedAt: { type: Date, required: false },
@@ -71,7 +71,7 @@ UserSchema.pre<IUserDocument>("save", async function (next: Function) {
  * generate a jwt token
  * @return jwt string signed token
  */
-UserSchema.methods.generateToken = function () {
+UserSchema.methods.generateToken = function (this: IUserDocument) {
     return jwt.sign(
         {
             _id: this._id,
@@ -86,9 +86,11 @@ UserSchema.methods.generateToken = function () {
  * match database password with user input
  * @return boolean value
  */
-UserSchema.methods.matchPassword = async function (inputPassword) {
-    return await bcrypt.compare(inputPassword, this.password)
-}
-
+UserSchema.methods.matchPassword = async function (
+    this: IUserDocument,
+    inputPassword: string
+) {
+    return await bcrypt.compare(inputPassword, this.password);
+};
 
 export default mongoose.model<IUserDocument>("User", UserSchema);

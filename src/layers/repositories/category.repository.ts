@@ -1,5 +1,5 @@
 
-import { ICategory } from "../core/interfaces/model-interfaces";
+import { ICategory } from "../../core/interfaces/model-interfaces";
 import { BaseRepository } from "./base/base.repository";
 
 export class CategoryRepository extends BaseRepository<ICategory> {

@@ -14,7 +14,6 @@ class ArticleController {
     getArticles = asyncHandler(
         async (req: ExtendedRequest, res: Response, next: NextFunction) => {
             const response = await this.articleService.getAllArticles();
-
             res.status(200).json(response);
         }
     );

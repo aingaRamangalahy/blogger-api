@@ -3,7 +3,7 @@ import { asyncHandler } from "../middlewares";
 import { ErrorResponse } from "../../core/utils";
 import { ExtendedRequest } from "../../core/interfaces/model-interfaces";
 
-import Category from "../../core/models/category.model";
+import Category from "../models/category.model";
 import Container from "typedi";
 import CategoryService from "../services/category.service";
 

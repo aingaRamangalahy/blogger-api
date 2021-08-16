@@ -1,7 +1,8 @@
-import { ICategory } from "../core/interfaces/model-interfaces";
+
 import { CategoryRepository } from "../repositories/category.repository";
-import Category from "../core/models/category.model";
+import Category from "../models/category.model";
 import { Service } from "typedi";
+import { ICategory } from "../../core/interfaces/model-interfaces";
 
 @Service()
 export default class CategoryService {

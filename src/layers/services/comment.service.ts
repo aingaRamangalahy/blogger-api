@@ -1,7 +1,8 @@
-import { IComment } from "../core/interfaces/model-interfaces";
+
 import { CommentRepository } from "../repositories/comment.repository";
-import Comment from "../core/models/comment.model";
+import Comment from "../models/comment.model";
 import { Service } from "typedi";
+import { IComment } from "../../core/interfaces/model-interfaces";
 
 @Service()
 export default class CommentService {

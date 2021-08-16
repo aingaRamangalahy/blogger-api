@@ -1,7 +1,8 @@
-import { IArticle } from "../core/interfaces/model-interfaces";
+
 import { ArticleRepository } from "../repositories/article.repository";
-import Article from "../core/models/article.model";
+import Article from "../models/article.model";
 import { Service } from "typedi";
+import { IArticle } from "../../core/interfaces/model-interfaces";
 
 @Service()
 export default class ArticleService {

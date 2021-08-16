@@ -1,9 +1,9 @@
-import { IUserDocument } from "../core/interfaces/model-interfaces";
+import { IUserDocument } from "../../core/interfaces/model-interfaces";
 import { BaseRepository } from "./base/base.repository";
 
 export class UserRepository extends BaseRepository<IUserDocument> {
 
-    addUser = (user: IUserDocument) => {
+    addUser = (user: any) => {
         return this.create(user)
     }
 
@@ -11,8 +11,8 @@ export class UserRepository extends BaseRepository<IUserDocument> {
         return this.find()
     }
 
-    getOneUser = (options: any) => {
-        return this.findOne(options)
+    getOneUser = (options: any, additionalField?: string) => {
+        return this.findOne(options, additionalField)
     }
 
     getUserById = (id: string) => {
