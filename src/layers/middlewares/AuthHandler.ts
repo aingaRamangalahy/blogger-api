@@ -9,11 +9,8 @@ import { ExtendedRequest, IUser } from "../../core/interfaces/model-interfaces";
 import { JWT_SECRET } from "../../core/environment";
 
 class Auth {
-    /**
-     * middleware to protect routes
-     * a query should have an authorization token to access protected routes
-     */
-    protect = asyncHandler(
+    
+    protectRoute = asyncHandler(
         async (req: ExtendedRequest, res: Response, next: NextFunction) => {
             let token;
             if (
@@ -44,16 +41,12 @@ class Auth {
         }
     );
 
-    /**
-     * middleware to protext routes with roles
-     * user should have the specified role to access the route
-     */
-    authorize = (...roles) => {
+    authorizedRoles = (...roles) => {
         return (req: ExtendedRequest, res: Response, next: NextFunction) => {
             if (!roles.includes(req.user.role)) {
                 return next(
                     new ErrorResponse(
-                        `User role ${req.user.role} has no access to this route`,
+                        `User role '${req.user.role}' has no access to this route`,
                         403
                     )
                 );

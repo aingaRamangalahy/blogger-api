@@ -1,29 +1,43 @@
-import { Router } from 'express';
-import CategoryController from '../controllers/category.controller';
-
+import { Router } from "express";
+import CategoryController from "../controllers/category.controller";
+import { auth } from "../middlewares";
 class CategoryRouter {
-
     router: Router;
 
-    constructor(){
+    constructor() {
         this.router = Router();
         this.routes();
     }
 
-    routes(){
+    routes() {
         // GET
-        this.router.get('/:id', CategoryController.getCategory)
-        this.router.get('', CategoryController.getCategories)
+        this.router.get("/:id", CategoryController.getCategory);
+        this.router.get("", CategoryController.getCategories);
 
         // POST
-        this.router.post('', CategoryController.createCategory)
+        this.router.post(
+            "",
+            auth.protectRoute,
+            auth.authorizedRoles("admin"),
+            CategoryController.createCategory
+        );
 
         // DELETE
-        this.router.delete('/:id', CategoryController.deleteCategory)
+        this.router.delete(
+            "/:id",
+            auth.protectRoute,
+            auth.authorizedRoles("admin"),
+            CategoryController.deleteCategory
+        );
 
         // PUT
-        this.router.put('/:id', CategoryController.updateCategory)
+        this.router.put(
+            "/:id",
+            auth.protectRoute,
+            auth.authorizedRoles("admin"),
+            CategoryController.updateCategory
+        );
     }
 }
 
-export default  new CategoryRouter().router;
+export default new CategoryRouter().router;

@@ -1,29 +1,43 @@
-import { Router } from 'express';
-import UserController from '../controllers/user.controller';
-
+import { Router } from "express";
+import UserController from "../controllers/user.controller";
+import { auth } from "../middlewares";
 class UserRouter {
-
     router: Router;
 
-    constructor(){
+    constructor() {
         this.router = Router();
         this.routes();
     }
 
-    routes(){
+    routes() {
         // GET
-        this.router.get('/:id', UserController.getUser)
-        this.router.get('', UserController.getUsers)
+        this.router.get("/:id", UserController.getUser);
+        this.router.get(
+            "",
+            auth.protectRoute,
+            auth.authorizedRoles("admin"),
+            UserController.getUsers
+        );
 
         // POST
-        this.router.post('', UserController.createUser)
+        this.router.post(
+            "",
+            auth.protectRoute,
+            auth.authorizedRoles("admin"),
+            UserController.createUser
+        );
 
         // DELETE
-        this.router.delete('/:id', UserController.deleteUser)
+        this.router.delete(
+            "/:id",
+            auth.protectRoute,
+            auth.authorizedRoles("admin"),
+            UserController.deleteUser
+        );
 
         // PUT
-        this.router.put('/:id', UserController.updateUser)
+        this.router.put("/:id", auth.protectRoute, UserController.updateUser);
     }
 }
 
-export default  new UserRouter().router;
+export default new UserRouter().router;
