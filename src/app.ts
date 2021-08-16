@@ -1,4 +1,4 @@
-import 'reflect-metadata'; // required by typeid
+import 'reflect-metadata'; // required by typedi
 import ServerLoader from "./core/loaders/server";
 import { PORT } from "./core/environment";
 
