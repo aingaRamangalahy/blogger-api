@@ -1,5 +1,5 @@
 import { Request } from "express"
-import { IUser } from ".";
+import { IUserDocument } from "./user.interface";
 export interface ExtendedRequest extends Request {
-    user?: IUser;
+    user?: IUserDocument;
 }

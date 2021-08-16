@@ -7,8 +7,14 @@ import * as jwt from "jsonwebtoken";
 import User from "../models/user.model";
 import { ExtendedRequest, IUser } from "../../core/interfaces/model-interfaces";
 import { JWT_SECRET } from "../../core/environment";
+import { UserRepository } from "../repositories/user.repository";
 
 class Auth {
+    private readonly userRepository: UserRepository;
+
+    constructor() {
+        this.userRepository = new UserRepository(User);
+    }
     
     protectRoute = asyncHandler(
         async (req: ExtendedRequest, res: Response, next: NextFunction) => {
@@ -33,7 +39,7 @@ class Auth {
             try {
                 const decoded = jwt.verify(token, JWT_SECRET);
                 // add user information to request object
-                req.user = await User.findById(decoded._id);
+                req.user = await this.userRepository.findById(decoded._id)
                 next();
             } catch (error) {
                 return next(new ErrorResponse("Invalid token", 401));
