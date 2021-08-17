@@ -1,20 +1,22 @@
-
 import { ArticleRepository } from "../repositories/article.repository";
 import Article from "../models/article.model";
 import { Service } from "typedi";
 import { IArticle } from "../../core/interfaces/model-interfaces";
+import { Request } from "express";
 
 @Service()
 export default class ArticleService {
-    private readonly articleRepository: ArticleRepository
+    private readonly articleRepository: ArticleRepository;
 
     constructor() {
-        this.articleRepository = new ArticleRepository(Article)
+        this.articleRepository = new ArticleRepository(Article);
     }
 
     createArticle = async (articlePayload: IArticle) => {
         try {
-            let article = await this.articleRepository.addArticle(articlePayload)
+            let article = await this.articleRepository.addArticle(
+                articlePayload
+            );
             return {
                 success: true,
                 data: article,
@@ -24,9 +26,23 @@ export default class ArticleService {
         }
     };
 
-    getAllArticles = async () => {
+    getPaginatedArticles = async (req: any) => {
         try {
-            let articles = await this.articleRepository.getArticles()
+            let result = await this.articleRepository.paginate(
+                req,
+                "author,comments,category"
+            );
+
+            return result;
+        } catch (error) {
+            throw error;
+        }
+    };
+
+    getAllArticles = async (req: any) => {
+        try {
+            let articles = await this.articleRepository.getArticles();
+
             return {
                 success: true,
                 data: articles,
@@ -38,7 +54,7 @@ export default class ArticleService {
 
     getArticleById = async (id: string) => {
         try {
-            let article = await this.articleRepository.getArticleById(id)
+            let article = await this.articleRepository.getArticleById(id);
             return {
                 success: true,
                 data: article,
@@ -50,7 +66,10 @@ export default class ArticleService {
 
     updateArticle = async (id: string, articlePayload: IArticle) => {
         try {
-            let article = await this.articleRepository.updateArticle(id, articlePayload)
+            let article = await this.articleRepository.updateArticle(
+                id,
+                articlePayload
+            );
 
             return {
                 success: true,
@@ -63,7 +82,7 @@ export default class ArticleService {
 
     deleteArticle = async (id: string) => {
         try {
-            await this.articleRepository.deleteArticle(id)
+            await this.articleRepository.deleteArticle(id);
             return {
                 success: true,
                 data: `Article removed successfully`,
@@ -72,5 +91,4 @@ export default class ArticleService {
             throw error;
         }
     };
-
 }

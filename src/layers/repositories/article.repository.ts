@@ -8,8 +8,8 @@ export class ArticleRepository extends BaseRepository<IArticle> {
         return this.create(article)
     }
 
-    getArticles = () => {
-        return this.find()
+    getArticles = (query?: any) => {
+        return this.find(query)
     }
 
     getOneArticle = (options: any) => {
@@ -26,6 +26,10 @@ export class ArticleRepository extends BaseRepository<IArticle> {
 
     deleteArticle = (id: string) => {
         return this.delete(id)
+    }
+
+    paginateArticles = (reqQuery, populate) => {
+        return this.paginate(reqQuery, populate)
     }
 
 }

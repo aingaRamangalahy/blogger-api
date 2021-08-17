@@ -13,7 +13,7 @@ class ArticleController {
 
     getArticles = asyncHandler(
         async (req: ExtendedRequest, res: Response, next: NextFunction) => {
-            const response = await this.articleService.getAllArticles();
+            const response = await this.articleService.getPaginatedArticles(req.query)
             res.status(200).json(response);
         }
     );

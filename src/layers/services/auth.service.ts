@@ -1,4 +1,3 @@
-import { ArticleRepository } from "../repositories/article.repository";
 import User from "../models/user.model";
 import { Service } from "typedi";
 import { UserRepository } from "../repositories/user.repository";
@@ -51,7 +50,7 @@ export default class AuthService {
 
     signup = async (userPayload) => {
         try {
-            const { name, email, password, role, about } = userPayload;
+            const { name, email, password, role } = userPayload;
 
             const user = await this.userRepository.addUser({
                 name,
