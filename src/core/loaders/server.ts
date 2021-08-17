@@ -4,7 +4,7 @@ import * as bodyParser from "body-parser";
 import * as cors from "cors";
 import * as mongoose from "mongoose";
 
-import { DB_URI, BODY_PARSER_LIMIT } from "../environment";
+import { DB_URI, BODY_PARSER_LIMIT } from "../../config/environment";
 
 import AppRoutes from "../../layers/routes";
 import { errorHandler } from "../../layers/middlewares";

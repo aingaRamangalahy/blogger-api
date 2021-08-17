@@ -4,7 +4,7 @@ import * as dotenv from "dotenv";
 dotenv.config({
     path: path.resolve(
         process.cwd(),
-        `src/core/environment/${process.env.NODE_ENV}.env`
+        `src/core/config/environment/${process.env.NODE_ENV}.env`
     ),
 });
 

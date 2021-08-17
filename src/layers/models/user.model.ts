@@ -3,7 +3,7 @@ import * as bcrypt from "bcrypt";
 import * as jwt from "jsonwebtoken";
 
 import { IUser, IUserDocument } from "../../core/interfaces/model-interfaces";
-import { JWT_SECRET, JWT_EXPIRE } from "../../core/environment";
+import { JWT_SECRET, JWT_EXPIRE } from "../../config/environment";
 
 let Schema = mongoose.Schema;
 let UserSchema = new Schema<IUserDocument>(

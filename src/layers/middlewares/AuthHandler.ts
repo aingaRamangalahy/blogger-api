@@ -6,7 +6,7 @@ import * as jwt from "jsonwebtoken";
 
 import User from "../models/user.model";
 import { ExtendedRequest, IUser } from "../../core/interfaces/model-interfaces";
-import { JWT_SECRET } from "../../core/environment";
+import { JWT_SECRET } from "../../config/environment";
 import { UserRepository } from "../repositories/user.repository";
 
 class Auth {
