@@ -5,7 +5,7 @@ class CommentRouter {
     router: Router;
 
     constructor() {
-        this.router = Router();
+        this.router = Router({ mergeParams: true });
         this.routes();
     }
 

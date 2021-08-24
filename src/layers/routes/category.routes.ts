@@ -1,6 +1,7 @@
 import { Router } from "express";
 import CategoryController from "../controllers/category.controller";
 import { auth } from "../middlewares";
+import articleRoutes from "./article.routes";
 class CategoryRouter {
     router: Router;
 

@@ -2,13 +2,20 @@ import { Router } from "express";
 import ArticleController from "../controllers/article.contoller";
 
 import { auth } from "../middlewares";
+import commentRoutes from "./comment.routes";
 
 class ArticleRouter {
     router: Router;
 
     constructor() {
-        this.router = Router();
+        this.router = Router({ mergeParams: true });
+        this.reRoutes();
         this.routes();
+    }
+
+    // function to re-route 
+    reRoutes() {
+        this.router.use("/:articleId/comments", commentRoutes)
     }
 
     routes() {

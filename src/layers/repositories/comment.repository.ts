@@ -8,8 +8,8 @@ export class CommentRepository extends BaseRepository<IComment> {
         return this.create(comment)
     }
 
-    getComments = () => {
-        return this.find()
+    getComments = (payload?: any) => {
+        return this.find(payload)
     }
 
     getOneComment = (options: any) => {

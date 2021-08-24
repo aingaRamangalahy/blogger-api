@@ -49,6 +49,20 @@ export default class CommentService {
         }
     };
 
+    getCommentsPerArticle = async (articleId: string) => {
+        try {
+            let comments = await this.commentRepository.getComments({ article: articleId });
+
+            return {
+                success: true,
+                data: comments,
+            };
+            
+        } catch (error) {
+            throw error;
+        }
+    }
+
     updateComment = async (id: string, commentPayload: IComment) => {
         try {
             let comment = await this.commentRepository.updateComment(id, commentPayload)

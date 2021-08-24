@@ -40,6 +40,7 @@ class ArticleController {
                 req.params.id,
                 req.body
             );
+
             res.status(200).json(response);
         }
     );

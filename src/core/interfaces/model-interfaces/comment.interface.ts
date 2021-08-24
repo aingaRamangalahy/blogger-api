@@ -1,5 +1,5 @@
 export interface IComment {
-    author: string;
+    user: string;
     content: string;
     article: string;
     isAnwerTo: string;

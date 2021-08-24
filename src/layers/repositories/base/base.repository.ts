@@ -111,7 +111,6 @@ export abstract class BaseRepository<T> implements IRead<T>, IWrite<T> {
             };
         }
 
-        /**add advanced results to res object */
         return {
             success: true,
             count: results.length,

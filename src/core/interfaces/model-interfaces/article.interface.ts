@@ -5,7 +5,6 @@ export interface IArticle  {
     coverImage: string;
     content: string;
     category: string;
-    comments: string;
     reactions: {
         clapps: number;
     };

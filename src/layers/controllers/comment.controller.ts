@@ -13,7 +13,12 @@ class CommentController {
 
     getComments = asyncHandler(
         async (req: ExtendedRequest, res: Response, next: NextFunction) => {
-            const response = await this.commentService.getAllComments();
+            let response;
+            if (req.params.articleId) {
+                response = await this.commentService.getCommentsPerArticle(req.params.articleId)
+            } else {
+                response = await this.commentService.getAllComments();
+            }
 
             res.status(200).json(response);
         }

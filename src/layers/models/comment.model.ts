@@ -5,7 +5,7 @@ let Schema = mongoose.Schema;
 
 let CommentSchema = new Schema<IComment>(
     {
-        author: {
+        user: {
             type: mongoose.SchemaTypes.ObjectId,
             ref: "User",
             required: true,

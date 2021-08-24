@@ -31,10 +31,6 @@ let ArticleSchema = new Schema<IArticle>(
             type: mongoose.SchemaTypes.ObjectId,
             ref: "Category",
         },
-        comments: {
-            type: [mongoose.SchemaTypes.ObjectId],
-            ref: "Comment",
-        },
         reactions: {
             clapps: Number,
         },

@@ -25,7 +25,7 @@ class ServerLoader {
                 useNewUrlParser: true,
                 useUnifiedTopology: true,
                 useCreateIndex: true,
-                useFindAndModify: true,
+                useFindAndModify: false,
             })
             .then(() => console.log("Database connected..."))
             .catch((e) => console.log("Database connection error", e.message));
